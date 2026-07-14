@@ -1,129 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <title>Tabela de Tarefas</title>
   <style>
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f5f7;
-      padding: 40px;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 20px;
     }
 
     h1 {
-      text-align: center;
+      color: #333;
     }
-
-    ul {
-      text-align: center;
-      padding: 0;
-      list-style: none;
-    }
-
-    li {
-      display: inline;
-      font-size: large;
-      margin-right: 50px;
-    }
-
 
     table {
-      border-collapse: collapse;
       width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border-collapse: collapse;
+      background-color: white;
     }
 
-    th,
-    td {
-      border: 1px solid #ddd;
-      padding: 12px 16px;
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
       text-align: left;
     }
 
     th {
-      background-color: #2c3e50;
-      color: #fff;
-      text-transform: uppercase;
-      font-size: 13px;
-      letter-spacing: 0.5px;
+      background-color: #333;
+      color: white;
     }
 
     tr:nth-child(even) {
       background-color: #f9f9f9;
     }
 
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-
-    .status {
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 12px;
+    .concluido {
+      color: green;
       font-weight: bold;
-      color: #fff;
-      display: inline-block;
     }
 
-    .status-concluido {
-      background-color: #27ae60;
+    .andamento {
+      color: orange;
+      font-weight: bold;
     }
 
-    .status-andamento {
-      background-color: #f39c12;
+    .pendente {
+      color: red;
+      font-weight: bold;
     }
 
-    .status-pendente {
-      background-color: #e74c3c;
+    a {
+      margin-right: 10px;
     }
   </style>
 </head>
-
 <body>
 
-  <h1>Seja bem-vindo {{nome}}</h1>
-  <ul>
-    <li><a href="{% url 'tarefas:home' %}">Home</a></li>
-    <li><a href="{% url 'tarefas:adicionar' %}">Adicionar</a></li>
-    <li><a href="{% url 'tarefas:editar' %}">Editar</a></li>
-    <li><a href="{% url 'tarefas:excluir' %}">Excluir</a></li>
-  </ul>
+  <h1>Bem-vindo, Ana</h1>
+
+  <p>
+    <a href="{% url 'tarefas:home' %}">Home</a>
+    <a href="{% url 'tarefas:adicionar' %}">Adicionar </a>
+  </p>
+
+  <h2>Lista de Tarefas</h2>
 
   <table>
-    <thead>
-      <tr>
-        <th>Assunto</th>
-        <th>Descrição</th>
-        <th>Status</th>
-        <th>Data</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Reunião de equipe</td>
-        <td>Alinhamento semanal sobre andamento dos projetos</td>
-        <td><span class="status status-concluido">Concluído</span></td>
-        <td>01/07/2026</td>
-      </tr>
-      <tr>
-        <td>Relatório financeiro</td>
-        <td>Elaboração do relatório mensal de despesas</td>
-        <td><span class="status status-andamento">Em andamento</span></td>
-        <td>05/07/2026</td>
-      </tr>
-      <tr>
-        <td>Entrega do projeto X</td>
-        <td>Finalização e envio da versão final ao cliente</td>
-        <td><span class="status status-pendente">Pendente</span></td>
-        <td>15/07/2026</td>
-      </tr>
-    </tbody>
+    <tr>
+      <th>Assunto</th>
+      <th>Descrição</th>
+      <th>Data</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+    <tr>
+      <td>Relatório mensal</td>
+      <td>Fechar números de vendas de junho</td>
+      <td>10/07/2026</td>
+      <td class="pendente">Pendente</td>
+      <td><a href="#">Editar</a><a href="#">Excluir</a></td>
+    </tr>
+    <tr>
+      <td>Reunião com cliente</td>
+      <td>Apresentar proposta de contrato</td>
+      <td>11/07/2026</td>
+      <td class="andamento">Andamento</td>
+      <td><a href="#">Editar</a><a href="#">Excluir</a></td>
+    </tr>
+    <tr>
+      <td>Atualizar site</td>
+      <td>Trocar imagens da página inicial</td>
+      <td>08/07/2026</td>
+      <td class="concluido">Concluído</td>
+      <td><a href="#">Editar</a><a href="#">Excluir</a></td>
+    </tr>
+    <tr>
+      <td>Organizar arquivos</td>
+      <td>Separar documentos por pasta</td>
+      <td>12/07/2026</td>
+      <td class="pendente">Pendente</td>
+      <td><a href="{% url 'tarefas:editar' id=tarefa.id % }">Editar</a><a href="{% url 'tarefas:remover' id=tarefa.id %}">Excluir</a></td>
+    </tr>
   </table>
 
 </body>
-
 </html>
