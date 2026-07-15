@@ -6,6 +6,11 @@
     <title>Editar</title>
 </head>
 <body>
-    <h1>Editar</h1>
+    <h1>Área de edição</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Salvar Alterações</button>
+    </form>
 </body>
 </html>
